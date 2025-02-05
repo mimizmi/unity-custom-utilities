@@ -20,7 +20,7 @@ namespace Mimizh.UnityUtilities
     [Serializable]
     public class ObservableArray<T> : IObservableArray<T>
     {
-        private T[] items;
+        public T[] items;
         public event Action<T[]> AnyValueChanged = delegate { };
         public int Count => items.Count(i => i != null);
         public T this[int index] => items[index];
