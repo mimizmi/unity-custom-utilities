@@ -208,6 +208,7 @@ public class TestTypeFilter : MonoBehaviour
    
        protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
        {
+           //Add binding here
            Bind<Hero, Mimizh.UnityUtilities.PersistentSystem.PlayerData>(gameData.playerData);
        }
    
@@ -265,4 +266,10 @@ public class TestTypeFilter : MonoBehaviour
    }
    ```
 
-   
+
+### How to DownLoad
+
+#### manifest.json
+   ```json
+      "com.mimizh.unity-utilities": "git@github.com:mimizmi/unity-custom-utilities.git"
+   ```

@@ -1,3 +1,14 @@
 {
-	"name": "Unity.CUtilities"
+    "name": "Unity.CUtilities",
+    "rootNamespace": "Mimizh.UnityUtilities",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
