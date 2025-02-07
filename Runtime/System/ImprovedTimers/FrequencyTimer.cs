@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-namespace Mimizh.UnityUtilities.ImprovedTimers
+namespace Mimizh.UnityUtilities
 {
     /// <summary>
     /// Timer that ticks at a specific frequency. (N times per second)

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Mimizh.UnityUtilities.ImprovedTimers
+namespace Mimizh.UnityUtilities
 {
     public static class TimerManager
     {

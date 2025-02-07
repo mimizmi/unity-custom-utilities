@@ -15,5 +15,21 @@ namespace Mimizh.UnityUtilities
         {
             gameObject.transform.DestroyChildren();
         }
+        
+        public static void HideInHierarchy(this GameObject gameObject) {
+            gameObject.hideFlags = HideFlags.HideInHierarchy;
+        }
+        
+        public static void EnableChildren(this GameObject gameObject) {
+            gameObject.transform.EnableChildren();
+        }
+        
+        public static void DisableChildren(this GameObject gameObject) {
+            gameObject.transform.DisableChildren();
+        }
+        
+        public static void ResetTransformation(this GameObject gameObject) {
+            gameObject.transform.Reset();
+        }
     }
 }

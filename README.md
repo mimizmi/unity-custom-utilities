@@ -1,51 +1,10 @@
 # UnityUtilities
 
-
-
-### EnumeratorExtension
-
-```c#
-public static IEnumerable<T> GetEnumerator<T>(this IEnumerator<T> enumerator)
-```
-
-
-
 ### Singleton
 
 1. Normal Singleton
 2. PersistentSingleton (destroy any new singleton)
 3. RegulatorSingleton (destory any old singleton)
-
-
-
-### TransformExtensions
-
-```c#
-public static void DestroyChildren(this Transform parent)
-public static void EnableChildren(this Transform parent)
-public static void DisableChildren(this Transform parent)
-```
-
-
-
-### Vector3Extensions
-
-```c#
-public static Vector3 With(this Vector3 vector, float? x = null, float? y = null, float? z = null)
-public static Vector3 Add(this Vector3 vector, float? x = null, float? y = null, float? z = null)
-```
-
-
-
-### GameObjectExtensions
-
-```c#
-public static T GetOrAdd<T>(this GameObject gameObject)
-public static T OrNull<T> (this T obj)
-public static void DestroyChildren(this GameObject gameObject)
-```
-
-
 
 ### TypeFilter
 
@@ -160,7 +119,7 @@ public class TestTypeFilter : MonoBehaviour
 
    * implement DataService *just giving a type T
 
-   ```
+   ```c#
    public class GameFileDataService : FileDataService<MyGameData>
    {
        public GameFileDataService(ISerializer serializer) : base(serializer)
@@ -175,71 +134,70 @@ public class TestTypeFilter : MonoBehaviour
 
    ```c#
    [Serializable]
-   public class MyGameData : IGameData
-   {
-       [SerializeField] private string name;
-       [SerializeField] private string currentLevelName;
-       public string Name
-       {
-           get => name;
-           set => name = value;
-       }
-   
-       public string CurrentLevelName
-       {
-           get => currentLevelName;
-           set => currentLevelName = value;
-       }
-       //Add your custom data in game
-       public Mimizh.UnityUtilities.PersistentSystem.PlayerData playerData;
-       
-   }
-   public class MySaveLoadSystem : SaveLoadSystem<MyGameData> {
-       protected override void Awake()
-       {
-           base.Awake();
-           gameData = new MyGameData
-           {
-               Name = "MyGame",
-               CurrentLevelName = "SampleScene",
-           };
-           dataService = new GameFileDataService(new JsonSerializer());
-       }
-   
-       protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-       {
-           //Add binding here
-           Bind<Hero, Mimizh.UnityUtilities.PersistentSystem.PlayerData>(gameData.playerData);
-       }
-   
-       public override void NewGame()
-       {
-           gameData = new MyGameData()
-           {
-               Name = "Game",
-               CurrentLevelName = "SampleScene"
-           };
-           SceneManager.LoadScene(gameData.CurrentLevelName);
-       }
-   
-       public override void SaveGame() => dataService.Save(gameData);
-   
-       public override void LoadGame(string gameName)
-       {
-           gameData = dataService.Load(gameName);
-   
-           if (String.IsNullOrWhiteSpace(gameData.CurrentLevelName))
-           {
-               gameData.CurrentLevelName = "Sample Scene";
-           }
-   
-           SceneManager.LoadScene(gameData.CurrentLevelName);
-       }
-   
-       public override void ReloadGame() => LoadGame(gameData.Name);
-   
-       public override void DeleteGame(string gameName) => dataService.Delete(gameName);
-   }
+    public class MyGameData : IGameData
+    {
+        public SavePlayerData savePlayerData;
+        public InventoryData inventoryData;
+        [SerializeField] private string name;
+        [SerializeField] private int currentSceneGroupIndex;
+        public string Name
+        {
+            get => name;
+            set => name = value;
+        }
+        public int CurrentSceneGroupIndex
+        {
+            get => currentSceneGroupIndex;
+            set => currentSceneGroupIndex = value;
+        }
+    }
+    public class MySaveLoadSystem : SaveLoadSystem<MyGameData>
+    {
+        [Inject] private SceneLoader _sceneLoader;
+        protected override void Awake()
+        {
+            base.Awake();
+            dataService = new GameFileDataService(new JsonSerializer());
+        }
+
+        protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            Bind<Hero, SavePlayerData>(gameData.savePlayerData);
+            Bind<Inventory.Inventory, InventoryData>(gameData.inventoryData);
+        }
+
+        //private void Start() => NewGame();
+
+        public override void NewGame()
+        {
+            gameData = new MyGameData()
+            {
+                Name = "Game",
+                CurrentSceneGroupIndex = 0
+            };
+            //SceneManager.LoadScene(gameData.CurrentLevelName);
+            Task a = _sceneLoader.LoadSceneGroup(gameData.CurrentSceneGroupIndex);
+        }
+
+        public override void SaveGame() => dataService.Save(gameData);
+
+        public override void LoadGame(string gameName)
+        {
+            gameData = dataService.Load(gameName);
+
+            if (gameData.CurrentSceneGroupIndex < 0 )
+            {
+                gameData.CurrentSceneGroupIndex = 0;
+            }
+            
+            //SceneManager.LoadScene(gameData.CurrentLevelName);
+            Task a = _sceneLoader.LoadSceneGroup(gameData.CurrentSceneGroupIndex);
+        }
+
+        public override void ReloadGame() => LoadGame(gameData.Name);
+
+        public override void DeleteGame(string gameName) => dataService.Delete(gameName);
+    }
    ```
 
    * Create Editor Tool for test
@@ -265,6 +223,47 @@ public class TestTypeFilter : MonoBehaviour
        }
    }
    ```
+
+### DI
+
+#### Create Provider (implementing from IDependencyProvider) use [Provide]
+
+```c#
+public class Provider : MonoBehaviour, IDependencyProvider
+{
+    [Provide] //provider itself
+    public Provider provider(){
+        return this
+    } 
+    [Provide]
+    public ServiceA ProvideA()
+    {
+        return new ServiceA();
+    }
+    [Provide]
+    public ServiceB ProvideB()
+    {
+        return new ServiceB();
+    }
+}
+```
+
+#### Inject class in filed or method (use [Inject])
+
+```c#
+public class ClassA : MonoBehaviour
+{
+	[Inject] ServiceA serviceA;
+    
+    ServiceB serviceB;
+    
+    [Inject]
+    void Init(ServiceB serviceB){
+        this.serviceB = serviceB;
+    }
+}
+```
+
 
 
 ### How to DownLoad

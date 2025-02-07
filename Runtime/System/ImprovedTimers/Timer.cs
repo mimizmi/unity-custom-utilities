@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-namespace Mimizh.UnityUtilities.ImprovedTimers
+namespace Mimizh.UnityUtilities
 {
     public abstract class Timer : IDisposable
     {

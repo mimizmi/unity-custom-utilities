@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Mimizh.UnityUtilities.ImprovedTimers
+namespace Mimizh.UnityUtilities
 {
     /// <summary>
     /// Timer that counts up from zero to infinity.  Great for measuring durations.

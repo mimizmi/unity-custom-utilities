@@ -20,12 +20,6 @@ namespace Mimizh.UnityUtilities.PersistentSystem
         
         protected IDataService<TGameData> dataService;
 
-        /*protected override void Awake()
-        {
-            base.Awake();
-            //dataService = new FileDataService(new JsonSerializer());
-        }*/
-
         protected virtual void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
         protected virtual void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
@@ -61,30 +55,14 @@ namespace Mimizh.UnityUtilities.PersistentSystem
         }
 
         public abstract void NewGame();
-            /*gameData = new GameData
-            {
-                Name = "New Game",
-                CurrentLevelName = "Sample Scene"
-            };*/
-            //SceneManager.LoadScene(gameData.CurrentLevelName);
 
 
-        public abstract void SaveGame();//=> dataService.Save(gameData);
+        public abstract void SaveGame();
 
         public abstract void LoadGame(string gameName);
-        /*{
-            gameData = dataService.Load(gameName);
 
-            if (String.IsNullOrWhiteSpace(gameData.CurrentLevelName))
-            {
-                gameData.CurrentLevelName = "Sample Scene";
-            }
-            
-            SceneManager.LoadScene(gameData.CurrentLevelName);
-        }*/
+        public abstract void ReloadGame();
 
-        public abstract void ReloadGame();// => LoadGame(gameData.Name);
-
-        public abstract void DeleteGame(string gameName); // => dataService.Delete(gameName);
+        public abstract void DeleteGame(string gameName);
     }
 }

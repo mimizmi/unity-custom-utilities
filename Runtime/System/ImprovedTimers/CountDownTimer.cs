@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Mimizh.UnityUtilities.ImprovedTimers
+namespace Mimizh.UnityUtilities
 {
     public class CountDownTimer : Timer
     {
