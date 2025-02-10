@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Mimizh.UnityUtilities
+namespace Mimizh.UnityUtilities.Editor
 {
     [CustomPropertyDrawer(typeof(SerializableType))]
     public class SerializableTypeDrawer : PropertyDrawer {

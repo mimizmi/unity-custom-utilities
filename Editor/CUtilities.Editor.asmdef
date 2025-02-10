@@ -1,0 +1,18 @@
+{
+    "name": "CUtilities.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1ceca205260bbef409715e192932a95e"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

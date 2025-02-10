@@ -11,7 +11,7 @@ namespace Mimizh.UnityUtilities.SceneManagement
     {
         public event Action<string> OnSceneLoaded = delegate { };
         public event Action<string> OnSceneUnloaded = delegate { };
-        public event Action OnGroupSceneLoaded = delegate { };
+        public event Action<string> OnGroupSceneLoaded = delegate { };
         
         SceneGroup ActiveSceneGroup;
         
@@ -59,7 +59,7 @@ namespace Mimizh.UnityUtilities.SceneManagement
                 SceneManager.SetActiveScene(activeScene);
             }
             
-            OnGroupSceneLoaded.Invoke();
+            OnGroupSceneLoaded.Invoke(sceneGroup.groupName);
         }
 
         public async Task UnloadSceneAsync()

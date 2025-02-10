@@ -27,7 +27,7 @@ namespace Mimizh.UnityUtilities.SceneManagement
         {
             Manager.OnSceneLoaded += sceneName => Debug.Log("Loaded :" + sceneName);
             Manager.OnSceneUnloaded += sceneName => Debug.Log("Unloaded :" + sceneName);
-            Manager.OnGroupSceneLoaded += () => Debug.Log("Group loaded");
+            Manager.OnGroupSceneLoaded += groupName => Debug.Log("Group loaded" + groupName);
         }
 
         async void Start()
