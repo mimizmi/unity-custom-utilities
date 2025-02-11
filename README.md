@@ -1,6 +1,11 @@
 # UnityUtilities
 
-
+<p align="center">
+    <a href="https://github.com/adammyhre/Unity-Utils" target="_blank">
+        <img alt="Inspired From" title="adammyhre's github" src="https://img.shields.io/badge/git--amend_utilities-white?style=flat&logo=github&labelColor=black">
+        <img alt="youtube channel" title="adammyhre's youtube" src="https://img.shields.io/badge/git--amend-red?style=flat&logo=youtube&labelColor=red&color=white"></a>
+</p>
+<hr>
 
 ### EnumeratorExtension
 
