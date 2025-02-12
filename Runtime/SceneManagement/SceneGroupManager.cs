@@ -48,12 +48,16 @@ namespace Mimizh.UnityUtilities.SceneManagement
             while (!operationGroup.IsDone)
             {
                 progress?.Report(operationGroup.Progress);
-                await Task.Delay(200);
+                await Task.Delay(100);
             }
+            
+            await Task.Delay(500);
 
             Scene activeScene =
                 SceneManager.GetSceneByName(ActiveSceneGroup.FindSceneNameByType(SceneType.ActiveScene));
 
+            
+            
             if (activeScene.IsValid())
             {
                 SceneManager.SetActiveScene(activeScene);
@@ -103,7 +107,7 @@ namespace Mimizh.UnityUtilities.SceneManagement
         
         //group load progress
         public float Progress => Operations.Count == 0 ? 0 : Operations.Average(o => o.progress);
-        public bool IsDone => Operations.All(o => o.isDone);
+        public bool IsDone => Operations.All(o => o.isDone) && Operations.All(o => o.progress >= 0.9f);
 
         public AsyncOperationGroup(int initialCapacity)
         {

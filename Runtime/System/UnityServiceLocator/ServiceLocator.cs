@@ -110,6 +110,12 @@ namespace Mimizh.UnityUtilities
             return this;
         }
 
+        public ServiceLocator Deregister(Type type)
+        {
+            services.Deregister(type);
+            return this;
+        }
+
         public ServiceLocator Get<T>(out T service) where T : class
         {
             if (TryGetService(out service)) return this;

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.Collections;
+using PrimeTween;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,17 +62,37 @@ namespace Mimizh.UnityUtilities.SceneManagement
             
             LoadingProgress progress = new LoadingProgress();
             progress.Progressed += target => targetProgress = Mathf.Max(target, targetProgress);
-            EnableLoadingCanvas();
+            await EnableLoadingCanvas();
             
             await Manager.LoadSceneAsync(sceneGroups[index], progress);
-            EnableLoadingCanvas(false);
+            await EnableLoadingCanvas(false);
         }
 
-        public void EnableLoadingCanvas(bool enable = true)
+        public async Task EnableLoadingCanvas(bool enable = true)
         {
             isLoading = enable;
-            loadingCanvas.gameObject.SetActive(enable);
-            loadingCamera.gameObject.SetActive(enable);
+            var canvasGroup = loadingCanvas.gameObject.GetOrAdd<CanvasGroup>();
+            if (isLoading)
+            {
+                loadingCanvas.gameObject.SetActive(enable);
+                loadingCamera.gameObject.SetActive(enable);
+                
+
+                var tween = enable ? Tween.Alpha(canvasGroup, 1f, 1f, Ease.InQuad)
+                    : Tween.Alpha(canvasGroup, 0f, 1f, Ease.InOutQuad);
+
+                await tween;
+            }
+            else
+            {
+                var tween = enable ? Tween.Alpha(canvasGroup, 1f, 1f, Ease.InQuad)
+                    : Tween.Alpha(canvasGroup, 0f, 1f, Ease.InOutQuad);
+
+                await tween;
+                loadingCanvas.gameObject.SetActive(enable);
+                loadingCamera.gameObject.SetActive(enable);
+            }
         }
+        
     }
 }

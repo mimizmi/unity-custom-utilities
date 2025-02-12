@@ -54,5 +54,19 @@ namespace Mimizh.UnityUtilities
             }
             return this;
         }
+        
+        
+        public ServiceManager Deregister(Type type)
+        {
+            if (_services.TryGetValue(type, out var service))
+            {
+                if (service is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+                _services.Remove(type);
+            }
+            return this;
+        }
     }
 }

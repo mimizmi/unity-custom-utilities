@@ -2,6 +2,11 @@
 
 namespace Mimizh.UnityUtilities
 {
+    public interface IServiceUnloadHandler
+    {
+        void OnServiceUnload();
+    }
+    
     [DisallowMultipleComponent]
     [RequireComponent(typeof(ServiceLocator))]
     public abstract class Bootstrapper : MonoBehaviour

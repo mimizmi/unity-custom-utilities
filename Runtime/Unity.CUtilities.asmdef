@@ -3,7 +3,8 @@
     "rootNamespace": "Mimizh.UnityUtilities",
     "references": [
         "GUID:caca889fed6088d40b22c2d7e2909c31",
-        "GUID:69518689ee43e43439e85b2232f66f27"
+        "GUID:69518689ee43e43439e85b2232f66f27",
+        "GUID:80ecb87cae9c44d19824e70ea7229748"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

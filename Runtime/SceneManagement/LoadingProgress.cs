@@ -10,7 +10,7 @@ namespace Mimizh.UnityUtilities.SceneManagement
         
         public void Report(float value)
         {
-            Progressed?.Invoke(value / ratio);
+            Progressed?.Invoke(value); // / ratio);
         }
     }
 }
