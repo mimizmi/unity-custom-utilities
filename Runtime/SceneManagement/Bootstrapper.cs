@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace Mimizh.UnityUtilities.SceneManagement
 {
+    /*
     public class Bootstrapper : PersistentSingleton<Bootstrapper>
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -12,5 +13,5 @@ namespace Mimizh.UnityUtilities.SceneManagement
             Debug.Log("Bootstrapper init");
             await SceneManager.LoadSceneAsync("Bootstrapper", LoadSceneMode.Single);
         }
-    }
+    }*/
 }

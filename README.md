@@ -271,6 +271,21 @@ public class TestTypeFilter : MonoBehaviour
    ```
 
 
+### SceneManager 
+
+#### Bootstrapper
+   ```c#
+        public class Bootstrapper : PersistentSingleton<Bootstrapper>
+       {
+           [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+           static async void Init()
+           {
+               Debug.Log("Bootstrapper init");
+               await SceneManager.LoadSceneAsync("Bootstrapper", LoadSceneMode.Single);
+           }
+       }
+   ```
+
 ### How to DownLoad
 
 #### manifest.json
