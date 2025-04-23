@@ -8,7 +8,7 @@ namespace Mimizh.UnityUtilities.Editor
     [CustomPropertyDrawer(typeof(SerializableGuid))]
     public class SerializableGuidDrawer : PropertyDrawer
     {
-        static readonly string[] GuidParts = { "part1", "part2", "part3", "part4" };
+        static readonly string[] GuidParts = { "Part1", "Part2", "Part3", "Part4" };
         private const float ButtonWidth = 22f;
         private const float Spacing = 2f;
         private GUIStyle guidLabelStyle;
